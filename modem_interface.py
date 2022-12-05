@@ -8,17 +8,17 @@ try:
 except FileNotFoundError:
     ip_address = "" # dosya bulunamazsa boş bir değer atanır
 
-if ip_address:
-    # IP adresi dosyada bulunursa tarayıcıda açar ve sekme açıldığında kodu kapatır
-    webbrowser.open_new_tab("http://" + ip_address)
-    exit()
-else:
-    # IP adresi dosyada bulunamazsa uyarı mesajı gösterir
-    print("Please enter IP address")
-
 window = tk.Tk()
 window.geometry("540x540")
-ip_label = tk.Label(window, text=ip_address)
+
+if ip_address:
+    # IP adresi dosyada bulunursa tarayıcıda açar ve pencerede gösterir
+    webbrowser.open_new_tab("http://" + ip_address)
+    exit()
+    ip_label = tk.Label(window, text=ip_address)
+else:
+    # IP adresi dosyada bulunamazsa pencerede uyarı mesajı gösterir
+    ip_label = tk.Label(window, text="Please enter IP address")
 ip_label.pack()
 
 def change_ip():
