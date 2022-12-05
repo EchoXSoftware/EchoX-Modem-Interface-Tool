@@ -1,3 +1,5 @@
+#By EchoX
+
 import webbrowser
 import tkinter as tk
 
