@@ -6,9 +6,15 @@ try:
     with open("saved_ip.txt", "r") as f:
         ip_address = f.read()
 except FileNotFoundError:
-    ip_address = "192.168.1.1"
+    ip_address = "" # dosya bulunamazsa boş bir değer atanır
 
-webbrowser.open("http://" + ip_address)
+if ip_address:
+    # IP adresi dosyada bulunursa tarayıcıda açar ve sekme açıldığında kodu kapatır
+    webbrowser.open_new_tab("http://" + ip_address)
+    exit()
+else:
+    # IP adresi dosyada bulunamazsa uyarı mesajı gösterir
+    print("Please enter IP address")
 
 window = tk.Tk()
 window.geometry("540x540")
@@ -19,11 +25,14 @@ def change_ip():
     global ip_address
     ip_address = input_field.get() # alınan ip adresi değişkenine atanır
     ip_label.config(text=ip_address)
-    webbrowser.open("http://" + ip_address)
+    webbrowser.open_new_tab("http://" + ip_address)
 
     # IP adresini dosyaya kaydet
     with open("saved_ip.txt", "w") as f:
         f.write(ip_address)
+
+    # kodu kapat
+    window.quit()
 
 # girdi alanının oluşturulması
 input_field = tk.Entry(window)
