@@ -1,12 +1,18 @@
-#By EchoX
+#by EchoX
 
 import webbrowser
 import tkinter as tk
+import base64
+
+# IP adresini şifreleyen fonksiyon
+def encode_ip(ip):
+    return base64.b64encode(ip.encode()).decode()
 
 # IP adresini dosyadan oku
 try:
     with open("saved_ip.txt", "r") as f:
-        ip_address = f.read()
+        # dosyadaki veriyi çözüp IP adresine ata
+        ip_address = base64.b64decode(f.read()).decode()
 except FileNotFoundError:
     ip_address = "" # dosya bulunamazsa boş bir değer atanır
 
@@ -32,7 +38,8 @@ def change_ip():
 
     # IP adresini dosyaya kaydet
     with open("saved_ip.txt", "w") as f:
-        f.write(ip_address)
+        # IP adresini şifreleyerek kaydet
+        f.write(encode_ip(ip_address))
 
     # kodu kapat
     window.quit()
