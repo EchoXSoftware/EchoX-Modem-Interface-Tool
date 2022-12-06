@@ -12,6 +12,7 @@ except FileNotFoundError:
 
 window = tk.Tk()
 window.geometry("540x540")
+window.title("EchoX's Modem Interface Tool")
 
 if ip_address:
     # IP adresi dosyada bulunursa tarayıcıda açar ve pencerede gösterir
@@ -43,4 +44,4 @@ input_field.pack()
 change_button = tk.Button(window, text="Change IP", command=change_ip)
 change_button.pack()
 
-window.mainloop()
+window.mainloop(0)
